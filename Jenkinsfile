@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-      DOCKER_IMAGE = 'vitePress'
+      DOCKER_IMAGE = 'vitepress'
       PATH = "${env.PATH}:/usr/bin"
     }
     stages {
@@ -40,7 +40,7 @@ pipeline {
                       sh 'pwd'          // 输出当前工作区绝对路径
                       sh 'ls -l'         // 列出所有文件，确认是否存在 Dockerfile
                       sh 'find . -name Dockerfile'  // 搜索整个目录树1
-                      sh 'docker build -t vitePress .'
+                      sh "docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
@@ -48,8 +48,8 @@ pipeline {
         stage('Cleanup Old Container') {
             steps {
                 script {
-                    sh 'docker stop vitePress-container || true'
-                    sh 'docker rm vitePress-container || true'
+                    sh 'docker stop vitepress-container || true'
+                    sh 'docker rm vitepress-container || true'
                 }
             }
         }
@@ -58,9 +58,9 @@ pipeline {
             steps {
                 script {
                      // 停止并删除旧容器
-                    sh "docker stop vitePress-container || true && docker rm vitePress-container || true"
+                    sh "docker stop vitepress-container || true && docker rm vitepress-container || true"
                     // 运行新容器
-                    sh "docker run -d -p 8085:80 --name vitePress-container ${DOCKER_IMAGE}"
+                    sh "docker run -d -p 8085:80 --name vitepress-container ${DOCKER_IMAGE}"
                 }
             }
         }
