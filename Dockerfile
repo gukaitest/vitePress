@@ -5,7 +5,7 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # 复制自定义 Nginx 配置
-COPY nginx.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # 复制本地构建的静态文件（VitePress 默认输出到 docs/.vitepress/dist）
 COPY docs/.vitepress/dist /usr/share/nginx/html

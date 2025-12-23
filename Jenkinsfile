@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-      DOCKER_IMAGE = 'front-end-image'
+      DOCKER_IMAGE = 'vitePress'
       PATH = "${env.PATH}:/usr/bin"
     }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/gukaitest/vue3-elementPlus.git'
+                git branch: 'main', url: 'https://github.com/gukaitest/vitePress.git'
             }
         }
         stage('构建项目') {
@@ -40,7 +40,7 @@ pipeline {
                       sh 'pwd'          // 输出当前工作区绝对路径
                       sh 'ls -l'         // 列出所有文件，确认是否存在 Dockerfile
                       sh 'find . -name Dockerfile'  // 搜索整个目录树1
-                      sh 'docker build -t front-end-image .'
+                      sh 'docker build -t vitePress .'
                 }
             }
         }
@@ -48,8 +48,8 @@ pipeline {
         stage('Cleanup Old Container') {
             steps {
                 script {
-                    sh 'docker stop front-end-image-container || true'
-                    sh 'docker rm front-end-image-container || true'
+                    sh 'docker stop vitePress-container || true'
+                    sh 'docker rm vitePress-container || true'
                 }
             }
         }
@@ -58,9 +58,9 @@ pipeline {
             steps {
                 script {
                      // 停止并删除旧容器
-                    sh "docker stop front-end-image-container || true && docker rm front-end-image-container || true"
+                    sh "docker stop vitePress-container || true && docker rm vitePress-container || true"
                     // 运行新容器
-                    sh "docker run -d -p 8083:80 --name front-end-image-container ${DOCKER_IMAGE}"
+                    sh "docker run -d -p 8085:80 --name vitePress-container ${DOCKER_IMAGE}"
                 }
             }
         }
