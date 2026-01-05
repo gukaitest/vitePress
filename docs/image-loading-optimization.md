@@ -16,7 +16,7 @@ http://47.103.169.121:8083/personal-content/image-loading-optimization
 
 ![image优化效果图](./images/image-optimization/image2.png)
 
-## IntersectionObserver 实现方式
+## IntersectionObserver 实现方式效果展示
 
 ![image优化效果图](./images/image-optimization/image3.png)
 

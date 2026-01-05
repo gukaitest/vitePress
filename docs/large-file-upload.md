@@ -30,6 +30,8 @@ const useWorker = (file: File): Promise<WorkerResult> => {
 };
 ```
 
+![大文件上传效果图](./images/large-file-upload/image1.png)
+
 - 在 Web Worker 中计算 MD5，不阻塞主线程
 - 支持进度反馈
 
@@ -42,6 +44,14 @@ if (!shouldUpload) {
 }
 ```
 
+第一次上传
+
+![大文件上传效果图](./images/large-file-upload/image2.png)
+
+刷新页面，第二次上传
+
+![大文件上传效果图](./images/large-file-upload/image3.png)
+
 - 上传前检查文件是否存在
 - 存在则直接完成，无需上传
 
@@ -53,6 +63,15 @@ inTaskArrItem.allChunkList = inTaskArrItem.allChunkList.filter(
   (chunk) => !uploadedList.includes(chunk.chunkHash)
 );
 ```
+
+暂停上传
+
+![大文件上传效果图](./images/large-file-upload/image4.png)
+![大文件上传效果图](./images/large-file-upload/image5.png)
+
+继续上传
+
+![大文件上传效果图](./images/large-file-upload/image6.png)
 
 - 检查已上传的切片
 - 仅上传缺失的切片

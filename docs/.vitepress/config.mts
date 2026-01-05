@@ -12,7 +12,14 @@ const frontEndQuestionSidebar = [
       { text: '图片滚动加载优化', link: '/image-loading-optimization' },
       { text: 'echarts优化', link: '/echarts-optimization' },
       { text: '大文件上传', link: '/large-file-upload' },
-      { text: '前端监控', link: '/frontendmonitoring' }
+      { text: '前端监控', link: '/frontendmonitoring' },
+      { text: 'Jenkins CI/CD', link: '/jenkins-ci-cd' },
+      { text: 'Webpack配置优化', link: '/webpack-optimization' },
+      { text: 'Vite配置优化', link: '/vite-optimization' },
+      { text: '单点登录', link: '/sso' },
+      { text: 'Canvas优化', link: '/canvas-optimization' },
+      { text: 'Dify', link: '/dify' },
+      { text: 'Nginx配置', link: '/nginx-config' }
     ]
   }
 ]
@@ -25,8 +32,9 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
-      { text: '前端重难点', link: '/front-end-question' }
+      { text: '前端重难点', link: '/front-end-question' },
+      { text: '其它项目链接', link: '/other-project' },
+
     ],
 
     sidebar: {
@@ -40,13 +48,28 @@ export default defineConfig({
       '/echarts-optimization': frontEndQuestionSidebar,
       '/large-file-upload': frontEndQuestionSidebar,
       '/frontendmonitoring': frontEndQuestionSidebar,
-      // 其他路由下的侧边栏，显示Examples相关内容
+      '/jenkins-ci-cd': frontEndQuestionSidebar,
+      '/webpack-optimization': frontEndQuestionSidebar,
+      '/vite-optimization': frontEndQuestionSidebar,
+      '/sso': frontEndQuestionSidebar,
+      '/canvas-optimization': frontEndQuestionSidebar,
+      '/dify': frontEndQuestionSidebar,
+      '/nginx-config': frontEndQuestionSidebar,
+      // 其他项目链接路由配置
+      '/other-project': [
+        {
+          text: '其它项目链接',
+          items: [
+            { text: '其它项目链接', link: '/other-project' }
+          ]
+        }
+      ],
+      // 首页侧边栏配置
       '/': [
         {
-          text: 'Examples',
+          text: '其它项目链接',
           items: [
-            { text: 'Markdown Examples', link: '/markdown-examples' },
-            { text: 'Runtime API Examples', link: '/api-examples' }
+            { text: '其它项目链接', link: '/other-project' }
           ]
         }
       ]

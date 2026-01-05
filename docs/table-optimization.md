@@ -23,7 +23,7 @@ http://47.103.169.121:8083/personal-content/table-optimization
 
 ![table优化效果图](./images/table-optimization/image1.png)
 
-#### 滚到底部，加载更多数据
+### 滚到底部，加载更多数据
 
 ![table优化效果图](./images/table-optimization/image2.png)
 
@@ -37,7 +37,7 @@ http://47.103.169.121:8083/personal-content/table-optimization
 
 ![table优化效果图](./images/table-optimization/image4.png)
 
-#### 滚到底部，加载更多数据
+### 滚到底部，加载更多数据
 
 ![table优化效果图](./images/table-optimization/image5.png)
 

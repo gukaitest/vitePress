@@ -8,11 +8,11 @@ hero:
   tagline: 前端项目与功能合集
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: 前端场景功能展示
+      link: /front-end-question
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 其它项目链接
+      link: /other-project
 
 features:
   - title: vue3
