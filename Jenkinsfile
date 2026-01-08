@@ -79,7 +79,7 @@ pipeline {
                      // 停止并删除旧容器
                     sh "docker stop vitepress-container || true && docker rm vitepress-container || true"
                     // 运行新容器，映射 443 端口用于 HTTPS，80 端口用于 HTTP 重定向
-                    sh "docker run -d -p 443:443 -p 80:80 --name vitepress-container ${DOCKER_IMAGE}"
+                    sh "docker run -d -p 443:443 -p 8080:80 --name vitepress-container ${DOCKER_IMAGE}"
                 }
             }
         }
