@@ -60,7 +60,7 @@ pipeline {
                      // 停止并删除旧容器
                     sh "docker stop vitepress-container || true && docker rm vitepress-container || true"
                     // 运行新容器
-                    sh "docker run -d -p 8085:80 --name vitepress-container ${DOCKER_IMAGE}"
+                    sh "docker run -d -p 80:80 -p 443:443 -p 8080:80 --name vitepress-container ${DOCKER_IMAGE}"
                 }
             }
         }
