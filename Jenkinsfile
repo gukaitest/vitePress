@@ -32,6 +32,25 @@ pipeline {
                 }
             }
         }
+        stage('Prepare SSL Certificates') {
+            steps {
+                script {
+                    // 从 Jenkins 凭据中提取 SSL 证书文件
+                    withCredentials([
+                        file(credentialsId: 'ssl-cert-pem', variable: 'SSL_CERT_PEM'),
+                        file(credentialsId: 'ssl-cert-key', variable: 'SSL_CERT_KEY')
+                    ]) {
+                        sh 'echo "提取 SSL 证书文件..."'
+                        sh 'mkdir -p ssl'
+                        sh "cp ${SSL_CERT_PEM} ssl/gukai.top.pem"
+                        sh "cp ${SSL_CERT_KEY} ssl/gukai.top.key"
+                        sh 'chmod 644 ssl/gukai.top.pem'
+                        sh 'chmod 600 ssl/gukai.top.key'
+                        sh 'echo "SSL 证书文件准备完成"'
+                    }
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
@@ -59,8 +78,8 @@ pipeline {
                 script {
                      // 停止并删除旧容器
                     sh "docker stop vitepress-container || true && docker rm vitepress-container || true"
-                    // 运行新容器
-                    sh "docker run -d  -p 443:80 -p 8080:80 --name vitepress-container ${DOCKER_IMAGE}"
+                    // 运行新容器，映射 443 端口用于 HTTPS，80 端口用于 HTTP 重定向
+                    sh "docker run -d -p 443:443 -p 80:80 --name vitepress-container ${DOCKER_IMAGE}"
                 }
             }
         }
