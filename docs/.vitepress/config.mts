@@ -19,7 +19,8 @@ const frontEndQuestionSidebar = [
       { text: '单点登录', link: '/sso' },
       { text: 'Canvas优化', link: '/canvas-optimization' },
       { text: 'Dify', link: '/dify' },
-      { text: 'Nginx配置', link: '/nginx-config' }
+      { text: 'Nginx配置', link: '/nginx-config' },
+      { text: 'https/SSL与域名配置', link: '/https-ssl-domain-config' }
     ]
   }
 ]
@@ -55,6 +56,7 @@ export default defineConfig({
       '/canvas-optimization': frontEndQuestionSidebar,
       '/dify': frontEndQuestionSidebar,
       '/nginx-config': frontEndQuestionSidebar,
+      '/https-ssl-domain-config': frontEndQuestionSidebar,
       // 其他项目链接路由配置
       '/other-project': [
         {

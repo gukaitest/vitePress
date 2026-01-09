@@ -6,9 +6,9 @@ http://47.103.169.121:8083/personal-content/frontendmonitoring
 
 ---
 
-### 一、前端性能监控 (PerformanceOptimization)
+## 一、前端性能监控 (PerformanceOptimization)
 
-#### 1. Web Vitals 核心指标监控
+### 1. Web Vitals 核心指标监控
 
 ```typescript
 // 监控的核心指标
@@ -29,7 +29,7 @@ http://47.103.169.121:8083/personal-content/frontendmonitoring
 - 数据上报到后端
 - 表格展示历史数据
 
-#### 2. FPS 监控
+### 2. FPS 监控
 
 ```typescript
 fpsConfig: {
@@ -45,7 +45,7 @@ fpsConfig: {
 - 可配置采样间隔和持续时间
 - 支持阈值告警（默认 30fps）
 
-#### 3. 长任务监控 (Long Task)
+### 3. 长任务监控 (Long Task)
 
 ```typescript
 longTaskConfig: {
@@ -62,7 +62,7 @@ longTaskConfig: {
 - 记录任务来源（脚本、样式等）
 - 定位性能瓶颈
 
-#### 4. 内存监控与泄漏检测
+### 4. 内存监控与泄漏检测
 
 ```typescript
 memoryLeakConfig: {
@@ -82,7 +82,7 @@ memoryLeakConfig: {
 - 计算泄漏评分（0-100）
 - 趋势分析：stable / increasing / decreasing
 
-#### 5. 数据展示与统计
+### 5. 数据展示与统计
 
 - 表格展示：性能指标、值、评级、时间
 - 单位自动添加：ms、MB、fps 等
@@ -91,9 +91,9 @@ memoryLeakConfig: {
 
 ---
 
-### 二、前端错误监控 (ErrorMonitor)
+## 二、前端错误监控 (ErrorMonitor)
 
-#### 1. 错误类型覆盖
+### 1. 错误类型覆盖
 
 ```typescript
 enum ErrorType {
@@ -106,7 +106,7 @@ enum ErrorType {
 }
 ```
 
-#### 2. 错误级别分类
+### 2. 错误级别分类
 
 ```typescript
 enum ErrorLevel {
@@ -117,7 +117,7 @@ enum ErrorLevel {
 }
 ```
 
-#### 3. 错误信息收集
+### 3. 错误信息收集
 
 收集的信息包括：
 
@@ -130,7 +130,7 @@ enum ErrorLevel {
 - 请求错误：请求 URL、方法、数据、响应状态
 - 自定义数据：任意扩展信息
 
-#### 4. 错误捕获机制
+### 4. 错误捕获机制
 
 ```typescript
 // 1. 全局错误捕获
@@ -153,7 +153,7 @@ axios.interceptors.response.use(..., (error) => {
 })
 ```
 
-#### 5. 错误过滤与采样
+### 5. 错误过滤与采样
 
 ```typescript
 // 忽略常见错误
@@ -170,7 +170,7 @@ ignoreUrls: [/chrome-extension/, /moz-extension/, /safari-extension/];
 sampleRate: 1; // 100%采样率
 ```
 
-#### 6. 批量上报机制
+### 6. 批量上报机制
 
 ```typescript
 batchConfig: {
@@ -180,7 +180,7 @@ batchConfig: {
 }
 ```
 
-#### 7. 错误测试功能
+### 7. 错误测试功能
 
 提供测试按钮，可触发：
 
@@ -193,9 +193,9 @@ batchConfig: {
 
 ---
 
-### 三、前端用户行为监控 (Behavior)
+## 三、前端用户行为监控 (Behavior)
 
-#### 1. 行为类型监控
+### 1. 行为类型监控
 
 ```typescript
 enum UserBehaviorType {
@@ -213,7 +213,7 @@ enum UserBehaviorType {
 }
 ```
 
-#### 2. 行为级别分类
+### 2. 行为级别分类
 
 ```typescript
 enum UserBehaviorLevel {
@@ -224,7 +224,7 @@ enum UserBehaviorLevel {
 }
 ```
 
-#### 3. 点击行为监控
+### 3. 点击行为监控
 
 ```typescript
 click: {
@@ -242,7 +242,7 @@ click: {
 - 元素尺寸
 - 滚动位置
 
-#### 4. 滚动行为监控
+### 4. 滚动行为监控
 
 ```typescript
 scroll: {
@@ -253,7 +253,7 @@ scroll: {
 }
 ```
 
-#### 5. 输入行为监控
+### 5. 输入行为监控
 
 ```typescript
 input: {
@@ -272,7 +272,7 @@ input: {
 - 默认不记录输入值
 - 敏感字段自动过滤
 
-#### 6. 页面与导航监控
+### 6. 页面与导航监控
 
 ```typescript
 page: {
@@ -283,7 +283,7 @@ page: {
 }
 ```
 
-#### 7. 会话管理
+### 7. 会话管理
 
 ```typescript
 session: {
@@ -300,7 +300,7 @@ session: {
 - 30 分钟无活动自动结束会话
 - 记录会话开始/结束时间
 
-#### 8. 行为数据收集
+### 8. 行为数据收集
 
 收集的信息包括：
 
@@ -314,9 +314,9 @@ session: {
 
 ---
 
-### 四、核心特性总结
+## 四、核心特性总结
 
-#### 1. 批量上报优化
+### 1. 批量上报优化
 
 所有监控模块都支持批量上报：
 
@@ -324,26 +324,26 @@ session: {
 - 提高上报效率
 - 支持超时自动上报
 
-#### 2. 数据过滤机制
+### 2. 数据过滤机制
 
 - 错误过滤：忽略常见系统错误
 - 行为过滤：忽略系统元素和常见行为
 - URL 过滤：忽略扩展程序资源
 
-#### 3. 采样率控制
+### 3. 采样率控制
 
 ```typescript
 sampleRate: 1; // 0-1之间，控制上报比例
 ```
 
-#### 4. 内存保护
+### 4. 内存保护
 
 ```typescript
 maxErrors: 100; // 最多保存100个错误
 maxBehaviors: 1000; // 最多保存1000个行为
 ```
 
-#### 5. 环境变量配置
+### 5. 环境变量配置
 
 ```typescript
 // 通过环境变量配置上报URL
@@ -352,7 +352,7 @@ VITE_ERROR_MONITOR_REPORT_URL;
 VITE_USER_BEHAVIOR_REPORT_URL;
 ```
 
-#### 6. 控制台日志
+### 6. 控制台日志
 
 ```typescript
 enableConsoleLog: true; // 开发环境便于调试
@@ -360,7 +360,7 @@ enableConsoleLog: true; // 开发环境便于调试
 
 ---
 
-### 五、数据展示功能
+## 五、数据展示功能
 
 三个模块都提供：
 
@@ -371,7 +371,7 @@ enableConsoleLog: true; // 开发环境便于调试
 
 ---
 
-### 六、技术架构
+## 六、技术架构
 
 1. 模块化设计：性能、错误、行为独立模块
 2. 可配置：支持丰富的配置选项

@@ -6,9 +6,9 @@
 
 http://47.103.169.121:8083/personal-content/large-file-upload
 
-### 一、核心功能
+## 一、核心功能
 
-#### 1. 文件分片上传
+### 1. 文件分片上传
 
 ```typescript
 // 切片大小：1MB
@@ -18,7 +18,7 @@ const chunkSize = 1 * 1024 * 1024;
 - 将大文件切分为 1MB 的块
 - 分片独立上传，降低单次请求压力
 
-#### 2. 文件 Hash 计算（Web Worker）
+### 2. 文件 Hash 计算（Web Worker）
 
 ```typescript
 const useWorker = (file: File): Promise<WorkerResult> => {
@@ -35,7 +35,7 @@ const useWorker = (file: File): Promise<WorkerResult> => {
 - 在 Web Worker 中计算 MD5，不阻塞主线程
 - 支持进度反馈
 
-#### 3. 秒传功能
+### 3. 秒传功能
 
 ```typescript
 const res = await checkFile({ fileHash, fileName });
@@ -76,7 +76,7 @@ inTaskArrItem.allChunkList = inTaskArrItem.allChunkList.filter(
 - 检查已上传的切片
 - 仅上传缺失的切片
 
-#### 5. 暂停/继续上传
+### 5. 暂停/继续上传
 
 ```typescript
 // 暂停：取消所有进行中的请求
@@ -89,7 +89,7 @@ resumeUpload(taskArrItem); // state = 2
 - 可暂停和恢复
 - 暂停时取消进行中的请求
 
-#### 6. 取消上传
+### 6. 取消上传
 
 ```typescript
 // 取消单个文件
@@ -102,7 +102,7 @@ cancelAll();
 - 支持单个或全部取消
 - 取消时清理请求和状态
 
-#### 7. 多文件并发上传
+### 7. 多文件并发上传
 
 ```typescript
 Array.from(files).forEach(async (item, i) => {
@@ -113,7 +113,7 @@ Array.from(files).forEach(async (item, i) => {
 - 支持同时上传多个文件
 - 每个文件独立管理状态
 
-#### 8. 动态并发控制
+### 8. 动态并发控制
 
 ```typescript
 // 实时动态获取并发请求数
@@ -126,7 +126,7 @@ maxRequest.value = Math.ceil(6 / isTaskArrIng.length);
 - 根据同时上传的文件数动态调整每个文件的并发数
 - 总并发不超过 6（浏览器限制）
 
-#### 9. 错误重试机制
+### 9. 错误重试机制
 
 ```typescript
 if (taskArrItem.errNumber > 3) {
@@ -139,7 +139,7 @@ if (taskArrItem.errNumber > 3) {
 - 单个切片失败自动重试
 - 失败超过 3 次则中断
 
-#### 10. 上传进度显示
+### 10. 上传进度显示
 
 ```typescript
 taskArrItem.percentage = Number(
@@ -150,7 +150,7 @@ taskArrItem.percentage = Number(
 - 实时计算并显示上传进度
 - 基于已完成切片数量
 
-#### 11. 文件大小限制
+### 11. 文件大小限制
 
 ```typescript
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
@@ -162,7 +162,7 @@ if (file.size > MAX_FILE_SIZE) {
 - 限制单文件最大 100MB
 - 超限文件拒绝上传
 
-#### 12. 切片合并
+### 12. 切片合并
 
 ```typescript
 const handleMerge = async (taskArrItem: FileUploadStatus) => {
@@ -176,9 +176,9 @@ const handleMerge = async (taskArrItem: FileUploadStatus) => {
 
 ---
 
-### 二、性能优化手段
+## 二、性能优化手段
 
-#### 1. Web Worker 计算 Hash
+### 1. Web Worker 计算 Hash
 
 ```typescript
 // 在 Worker 线程中计算，不阻塞主线程
@@ -188,7 +188,7 @@ const worker = new Worker(new URL("@/worker/hash-worker.js", import.meta.url));
 - 避免主线程阻塞
 - 保持 UI 响应
 
-#### 2. 文件分片策略
+### 2. 文件分片策略
 
 ```typescript
 const chunkSize = 1 * 1024 * 1024; // 1MB 每片
@@ -198,7 +198,7 @@ const chunkSize = 1 * 1024 * 1024; // 1MB 每片
 - 提升上传成功率
 - 支持断点续传
 
-#### 3. 动态并发控制
+### 3. 动态并发控制
 
 ```typescript
 // 根据同时上传的文件数动态调整
@@ -208,7 +208,7 @@ maxRequest.value = Math.ceil(6 / isTaskArrIng.length);
 - 充分利用浏览器并发限制（6 个）
 - 多文件时自动分配并发
 
-#### 4. 断点续传优化
+### 4. 断点续传优化
 
 ```typescript
 // 跳过已上传的切片
@@ -222,7 +222,7 @@ if (uploadedList.length > 0) {
 - 避免重复上传
 - 节省带宽和时间
 
-#### 5. 秒传优化
+### 5. 秒传优化
 
 ```typescript
 if (!shouldUpload) {
@@ -233,7 +233,7 @@ if (!shouldUpload) {
 - 相同文件直接完成
 - 节省服务器资源
 
-#### 6. 请求取消机制
+### 6. 请求取消机制
 
 ```typescript
 const controller = new AbortController();
@@ -243,7 +243,7 @@ onCancel(() => controller.abort()); // 支持取消请求
 - 使用 AbortController 取消请求
 - 暂停/取消时及时释放资源
 
-#### 7. 错误重试优化
+### 7. 错误重试优化
 
 ```typescript
 if (!res || res.response.data.code !== "0000") {
@@ -259,7 +259,7 @@ if (!res || res.response.data.code !== "0000") {
 - 自动重试失败切片
 - 避免网络波动导致失败
 
-#### 8. 响应式状态管理
+### 8. 响应式状态管理
 
 ```typescript
 const inTaskArrItem = reactive<FileUploadStatus>({
@@ -272,7 +272,7 @@ const inTaskArrItem = reactive<FileUploadStatus>({
 - 使用 Vue3 reactive 管理状态
 - 自动更新 UI
 
-#### 9. 文件 Hash 唯一标识
+### 9. 文件 Hash 唯一标识
 
 ```typescript
 // 文件hash + 文件名，确保唯一性
@@ -282,7 +282,7 @@ inTaskArrItem.fileHash = `${fileHash}${baseName}`;
 - 相同内容不同文件名也能区分
 - 支持文件去重
 
-#### 10. 切片 Hash 标识
+### 10. 切片 Hash 标识
 
 ```typescript
 chunkHash: `${fileHash}-${index}`, // 文件hash + 索引
@@ -293,7 +293,7 @@ chunkHash: `${fileHash}-${index}`, // 文件hash + 索引
 
 ---
 
-### 三、工作流程
+## 三、工作流程
 
 ```
 用户选择文件
@@ -323,7 +323,7 @@ Web Worker 计算文件 Hash（不阻塞主线程）
 
 ---
 
-### 四、优化效果对比
+## 四、优化效果对比
 
 | 优化手段      | 优化前     | 优化后     | 提升效果              |
 | ------------- | ---------- | ---------- | --------------------- |
@@ -336,7 +336,7 @@ Web Worker 计算文件 Hash（不阻塞主线程）
 
 ---
 
-### 五、技术亮点总结
+## 五、技术亮点总结
 
 1. 多线程处理：Web Worker 计算 Hash
 2. 智能并发：动态调整并发数
