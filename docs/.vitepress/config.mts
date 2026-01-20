@@ -29,6 +29,7 @@ const frontEndQuestionSidebar = [
 export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",
+  lastUpdated: true,
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -79,6 +80,19 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
+    ],
+
+    footer: {
+      message: '工信部备案号：豫ICP备2025159841号-1，公安备案号：豫公网安备41152802000185号',
+      copyright: ''
+    },
+
+    lastUpdated: {
+      text: '最后更新时间：',
+      formatOptions: {
+        dateStyle: 'short',
+        timeStyle: 'medium'
+      }
+    }
   }
 })
