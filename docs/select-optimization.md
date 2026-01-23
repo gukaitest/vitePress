@@ -27,6 +27,6 @@ http://47.103.169.121:8083/personal-content/select-optimization
 
 ![下拉框优化效果图](./images/select-optimization/image2.png)
 
-### 以及搜索功能，搜索的结果也是滚动加载，按需渲染
+### 远程搜索+防抖功能，搜索的结果也是滚动加载，按需渲染
 
 ![下拉框优化效果图](./images/select-optimization/image3.png)
