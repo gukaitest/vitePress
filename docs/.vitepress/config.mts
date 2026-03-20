@@ -20,7 +20,8 @@ const frontEndQuestionSidebar = [
       { text: 'Canvas优化', link: '/canvas-optimization' },
       { text: 'Dify', link: '/dify' },
       { text: 'Nginx配置', link: '/nginx-config' },
-      { text: 'https/SSL与域名配置', link: '/https-ssl-domain-config' }
+      { text: 'https/SSL与域名配置', link: '/https-ssl-domain-config' },
+      { text: 'WebSocket', link: '/websocket' }
     ]
   }
 ]
@@ -58,6 +59,7 @@ export default defineConfig({
       '/dify': frontEndQuestionSidebar,
       '/nginx-config': frontEndQuestionSidebar,
       '/https-ssl-domain-config': frontEndQuestionSidebar,
+      '/websocket': frontEndQuestionSidebar,
       // 其他项目链接路由配置
       '/other-project': [
         {

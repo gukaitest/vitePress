@@ -4,7 +4,7 @@
 由于服务器内存大小原因，上传的文件大小被限制最大为 100M，超过 100M 自动清除所有内容，可自行上传文件，在控制台查看关键上传信息和处理流程
 :::
 
-http://47.103.169.121:8083/personal-content/large-file-upload
+在线地址: http://47.103.169.121:8083/personal-content/large-file-upload
 
 ## 一、核心功能
 
@@ -23,7 +23,7 @@ const chunkSize = 1 * 1024 * 1024;
 ```typescript
 const useWorker = (file: File): Promise<WorkerResult> => {
   const worker = new Worker(
-    new URL("@/worker/hash-worker.js", import.meta.url)
+    new URL("@/worker/hash-worker.js", import.meta.url),
   );
   worker.postMessage({ file, chunkSize });
   // 使用 SparkMD5 计算文件 MD5
@@ -60,7 +60,7 @@ if (!shouldUpload) {
 ```typescript
 // 过滤掉已经上传过的切片
 inTaskArrItem.allChunkList = inTaskArrItem.allChunkList.filter(
-  (chunk) => !uploadedList.includes(chunk.chunkHash)
+  (chunk) => !uploadedList.includes(chunk.chunkHash),
 );
 ```
 
@@ -118,7 +118,7 @@ Array.from(files).forEach(async (item, i) => {
 ```typescript
 // 实时动态获取并发请求数
 const isTaskArrIng = uploadFileList.value.filter(
-  (item) => item.state === 1 || item.state === 2
+  (item) => item.state === 1 || item.state === 2,
 );
 maxRequest.value = Math.ceil(6 / isTaskArrIng.length);
 ```
@@ -143,7 +143,7 @@ if (taskArrItem.errNumber > 3) {
 
 ```typescript
 taskArrItem.percentage = Number(
-  ((taskArrItem.finishNumber / needObj.chunkNumber) * 100).toFixed(2)
+  ((taskArrItem.finishNumber / needObj.chunkNumber) * 100).toFixed(2),
 );
 ```
 
@@ -214,7 +214,7 @@ maxRequest.value = Math.ceil(6 / isTaskArrIng.length);
 // 跳过已上传的切片
 if (uploadedList.length > 0) {
   inTaskArrItem.allChunkList = inTaskArrItem.allChunkList.filter(
-    (chunk) => !uploadedList.includes(chunk.chunkHash)
+    (chunk) => !uploadedList.includes(chunk.chunkHash),
   );
 }
 ```

@@ -1,5 +1,10 @@
 # Canvas 性能优化实战
 
+<br>
+<br>
+
+在线地址: http://47.103.169.121:8083/personal-content/canvas-optimization
+
 ## 概述
 
 Canvas 的性能优化核心在于：**减少不必要的重绘**（局部重绘、分层渲染）和 **降低单次绘制的开销**（合并 API 调用、复用样式与路径），并借助浏览器 DevTools 以 **数据驱动优化决策**。
@@ -28,7 +33,10 @@ Canvas 的性能优化核心在于：**减少不必要的重绘**（局部重绘
   - 只对这些区域进行清除和重绘。
 
 ```ts
-function renderDirty(ctx: CanvasRenderingContext2D, dirtyRect: { x: number; y: number; w: number; h: number }) {
+function renderDirty(
+  ctx: CanvasRenderingContext2D,
+  dirtyRect: { x: number; y: number; w: number; h: number },
+) {
   const { x, y, w, h } = dirtyRect;
   ctx.clearRect(x, y, w, h);
 
@@ -51,14 +59,28 @@ function renderDirty(ctx: CanvasRenderingContext2D, dirtyRect: { x: number; y: n
 
 ```html
 <div style="position: relative;">
-  <canvas id="bg" width="800" height="600" style="position:absolute;left:0;top:0;"></canvas>
-  <canvas id="fg" width="800" height="600" style="position:absolute;left:0;top:0;"></canvas>
+  <canvas
+    id="bg"
+    width="800"
+    height="600"
+    style="position:absolute;left:0;top:0;"
+  ></canvas>
+  <canvas
+    id="fg"
+    width="800"
+    height="600"
+    style="position:absolute;left:0;top:0;"
+  ></canvas>
 </div>
 ```
 
 ```ts
-const bgCtx = (document.getElementById("bg") as HTMLCanvasElement).getContext("2d")!;
-const fgCtx = (document.getElementById("fg") as HTMLCanvasElement).getContext("2d")!;
+const bgCtx = (document.getElementById("bg") as HTMLCanvasElement).getContext(
+  "2d",
+)!;
+const fgCtx = (document.getElementById("fg") as HTMLCanvasElement).getContext(
+  "2d",
+)!;
 
 // 只在初始化或配置变化时绘制背景
 drawStaticBackground(bgCtx);
@@ -184,7 +206,9 @@ function render(ctx: CanvasRenderingContext2D) {
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 const offscreen = canvas.transferControlToOffscreen();
 
-const worker = new Worker(new URL("./renderer.js", import.meta.url), { type: "module" });
+const worker = new Worker(new URL("./renderer.js", import.meta.url), {
+  type: "module",
+});
 worker.postMessage({ canvas: offscreen }, [offscreen]);
 ```
 
@@ -288,4 +312,3 @@ Canvas 优化一定要配合工具做 **前后对比**，否则很难评估改�
 4. **再测量**：重复使用同一场景进行对比，确认指标是否改善。
 
 通过这样**持续迭代 + 数据驱动**的方式，Canvas 应用既能在高性能设备上释放效果，又能在低性能设备上保持可用和流畅。
-

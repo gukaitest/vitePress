@@ -6,7 +6,7 @@ HTTPS（HyperText Transfer Protocol Secure）是 HTTP 的安全版本，通过 S
 
 ## 1.示例
 
-[gukai.top](https://gukai.top)
+在线地址: [gukai.top](https://gukai.top)
 
 ## 2.实现步骤
 
